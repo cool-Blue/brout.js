@@ -1,28 +1,47 @@
 {
-  "name"            : "brout",
-  "version"         : "0.1.0",
-  "description"     : "stdout and stderr for browsers",
-  "keywords"        : ["stdout", "stderr", "browser"],
-  "author"          : "Maximilian Antoni (http://maxantoni.de)",
-  "homepage"        : "https://github.com/mantoni/brout.js",
-  "main"            : "./lib/brout.js",
-  "engines"         : {
-    "node"          : ">=0.10"
+  "name": "brout",
+  "version": "1.0.2",
+  "description": "stdout and stderr for browsers",
+  "keywords": [
+    "stdout",
+    "stderr",
+    "browser",
+    "browserify",
+    "browserify-transform"
+  ],
+  "author": "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de)",
+  "contributors": [
+    "Deema Yvanow <df.creative@gmail.com>"
+  ],
+  "homepage": "https://github.com/mantoni/brout.js",
+  "main": "./lib/transform.js",
+  "browser": "./lib/brout.js",
+  "engines": {
+    "node": ">=0.10"
   },
-  "scripts"         : {
-    "test"          : "make test"
+  "scripts": {
+    "lint": "jslint --edition=latest --color \"**/*.js\"",
+    "pretest": "npm run lint",
+    "test": "browserify -p mocaccino ./test/*.js | phantomic"
   },
-  "repository"      : {
-    "type"          : "git",
-    "url"           : "https://github.com/mantoni/brout.js.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mantoni/brout.js.git"
   },
-  "devDependencies" : {
-    "mocha"         : ">=1.17 <2",
-    "jslint"        : "~0.2.6",
-    "browserify"    : ">=3.21 <4",
-    "mocaccino"     : "~0.2.0",
-    "phantomic"     : "~0.2.1"
+  "dependencies": {
+    "through2": "^2.0.0"
   },
-  "files"           : ["lib", "README.md", "LICENSE"],
-  "license"         : "MIT"
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "jslint": "^0.8",
+    "browserify": "^13.0.0",
+    "mocaccino": "^1.7.0",
+    "phantomic": "^1.4.0"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT"
 }
