@@ -95,18 +95,18 @@ describe('brout', function () {
     assert.deepEqual(out.args, ['# >>> Say hello!\n']);
   });
 
-  it('emits out event on console.info', function () {
-    console.info('# >>> Say %s!', 'hello');
+  it('no longer emits out event on console.info', function () {
+    console.info('# >>> Say %s!', 'hello on info channel');
 
-    assert(out.called);
-    assert.deepEqual(out.args, ['# >>> Say hello!\n']);
+    assert(!out.called);
+
   });
 
-  it('emits err event on console.warn', function () {
-    console.warn('# >>> Say %s!', 'hello');
+  it('no longer emits err event on console.warn', function () {
+    console.warn('# >>> Say %s!', 'hello on warn channel');
 
-    assert(err.called);
-    assert.deepEqual(err.args, ['# >>> Say hello!\n']);
+    assert(!err.called);
+
   });
 
   it('emits err event on console.error', function () {
@@ -154,20 +154,6 @@ describe('brout', function () {
 
     process.stdout.write('Check\n');
     console.log.original = previousOriginal;
-    brout.on('out', originalOut);
-    brout.on('err', originalErr);
-
-    assert(fake.called);
-    assert.deepEqual(fake.args, ['Check']);
-  });
-
-  it('prints result in original console.warn if no listeners', function () {
-    brout.removeAllListeners();
-    var previousOriginal = console.warn.original;
-    var fake = console.warn.original = createFake();
-
-    process.stderr.write('Check\n');
-    console.warn.original = previousOriginal;
     brout.on('out', originalOut);
     brout.on('err', originalErr);
 

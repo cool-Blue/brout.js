@@ -1,12 +1,17 @@
 # Changes
 
+## 1.1.1
+
+- Fix referencing error on `console.log` and `console.error`
+- Excluded `console.war` and `console.info`
+
 ## 1.1.0
 
 Streams 3: Update `through2` to `2.0`
 
 Bump devDependencies:
 
-- `browserify@13.0`
+- `b@13.0`
 - `mocaccino@1.7`
 - `phantomic@1.4`
 

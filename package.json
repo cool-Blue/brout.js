@@ -1,6 +1,6 @@
 {
   "name": "brout",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "stdout and stderr for browsers",
   "keywords": [
     "stdout",
@@ -20,9 +20,12 @@
     "node": ">=0.10"
   },
   "scripts": {
-    "lint": "jslint --edition=latest --color \"**/*.js\"",
+    "testDel": "dir test\\*.js && node ./test/pre-test && dir test\\*.js",
+    "lint": "jslint --edition=latest --color  \"**/!(*bundle).js\"",
     "pretest": "npm run lint",
-    "test": "browserify -p mocaccino ./test/*.js | phantomic"
+    "test": "browserify -p mocaccino test/brout-test.js | phantomic",
+    "test-client": "npm run pretest && node client-build test/brout-test.js > test/brout-bundle.js",
+    "debug": "node --debug server.js"
   },
   "repository": {
     "type": "git",
