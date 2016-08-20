@@ -21,10 +21,10 @@
   },
   "scripts": {
     "testDel": "dir test\\*.js && node ./test/pre-test && dir test\\*.js",
-    "lint": "jslint --edition=latest --color  \"**/!(*bundle).js\"",
+    "lint": "jslint --edition=latest --color  \"**/!(*bundle|*-test).js\"",
     "pretest": "npm run lint",
-    "test": "browserify -p mocaccino test/brout-test.js | phantomic",
-    "test-client": "npm run pretest && node client-build test/brout-test.js > test/brout-bundle.js",
+    "test": "browserify -p mocaccino test/brout-test.js -R \"html\" | phantomic",
+    "test-client": "npm run pretest && node copyBrout && node client-build test/brout-test.js > test/brout-bundle.js",
     "debug": "node --debug server.js"
   },
   "repository": {
@@ -35,6 +35,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
+    "brout": "^1.1.0",
     "mocha": "^2.3.4",
     "jslint": "^0.8",
     "browserify": "^13.0.0",

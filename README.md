@@ -54,13 +54,13 @@ Event listeners are tiggered by these calls:
 - `process.stderr.write(string)`
 - `process.exit(code)`
 
-The console functions `log` and `error` get replaced and the
+The console functions `log`, `info`, `warn` and `error` get replaced and the
 original implementation is exposed:
 
 - `console.log.original`
+- `console.info.original`
+- `console.warn.original`
 - `console.error.original`
-
-The `info` and `warn` channels are not affected.
 
 The console override behaves like node's implementation and writes to
 `process.stdout` and `process.sterr`.
