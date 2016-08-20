@@ -36,6 +36,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
+    "brout": "^1.1.0",
     "mocha": "^2.3.4",
     "jslint": "^0.8",
     "browserify": "^13.0.0",

@@ -18,6 +18,16 @@ console.error('error');
 process.stdout.write('stdout\n');
 process.stderr.write('stderr\n');
 
+require('../lib/brout1');
+var brout = require('../lib/brout');
+
+console.log('log');
+console.info('info');
+console.warn('warn');
+console.error('error');
+process.stdout.write('stdout\n');
+process.stderr.write('stderr\n');
+
 var events = require('events');
 var assert = require('assert');
 
@@ -230,7 +240,9 @@ describe('brout', function() {
     try {
       var fake = process.stdout.write = createFake(originalWrite);
 
+      console.info.original.call(console, 'about to call trace... ');
       console.trace();
+      console.info.original.call(console, 'trace called...');
 
       assert(fake.called);
       var l, lines = fake.args[0].split('\n');
