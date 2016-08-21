@@ -7,8 +7,8 @@
  */
 /*globals describe, it, beforeEach, afterEach*/
 'use strict';
-
-require('../lib/brout1');
+debugger;
+// require('../lib/brout1');
 var brout = require('../lib/brout');
 
 console.log('log');
@@ -230,21 +230,25 @@ describe('brout', function() {
     try {
       var fake = process.stdout.write = createFake(originalWrite);
 
-      console.info.original.call(console, 'about to call trace... ');
       console.trace();
-      console.info.original.call(console, 'trace called...');
 
       assert(fake.called);
-      var lines = fake.args[0].split('\n');
-      assert(lines.length > 0);
-      lines.slice(0, lines.length - 1).forEach(function(line) {
-        assert.equal(line.indexOf("    at "), 0, line);
+      var l, lines = fake.args[0].split('\n');
+      assert(l = lines.length > 0);
+      lines.slice(0, l - 1).forEach(function(line, i) {
+        if (i !== l - 1) {
+          assert.ok(!!line.match(/(?=^\s+at\s+)|(^.+@http:\/\/.+)/), '\n' + line + 'line ' + i);
+        } else {
+          assert.equal(lines[lines.length - 1], '');
+        }
       });
-      assert.equal(lines[lines.length - 1], '');
     } finally {
       process.stdout.write = originalWrite;
       done();
     }
+    after(function() {
+      brout.removeAllListeners();
+    })
   });
 
 });
