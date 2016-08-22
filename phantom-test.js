@@ -9,13 +9,16 @@ var b = require('browserify');
 const mocaccino = require('mocaccino');
 const phantomic = require('phantomic');
 
+console.log('open "http://localhost:9000" then select ' + module.filename
+  + '\nthen type "__run() in the console"');
+
 phantomic(
   b()
     .plugin(mocaccino)
     .add(sourceFile)
     .bundle(),
   {
-    debug: false,
+    debug: true,
     port: 0,
     brout: false,
     'web-security': false,

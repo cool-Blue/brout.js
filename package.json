@@ -22,11 +22,11 @@
   "scripts": {
     "lint": "jslint --edition=latest --color \"**/!(*bundle|*-test).js\"",
     "pretest": "npm run lint",
-    "test": "browserify -p mocaccino test/brout-test.js | phantomic",
+    "test": "browserify -p mocaccino test/brout-test.js | phantomic --debug",
     "just-test": "browserify -p mocaccino test/brout-test.js | phantomic",
     "test-client": "npm run pretest && node client-build test/brout-test.js > test/brout-bundle.js",
     "test-bundle": "browserify test/brout-test.js > test/brout-bundle.js",
-    "phantomBuild": "node phantom-test.js"
+    "phantom-test": "node phantom-test.js"
   },
   "repository": {
     "type": "git",
