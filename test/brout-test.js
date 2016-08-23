@@ -5,7 +5,11 @@
  *
  * @license MIT
  */
-/*globals describe, it, beforeEach, afterEach*/
+/*jslint
+ regexp: true
+ debug: true
+ */
+/*globals describe, it, beforeEach, afterEach, debugger*/
 'use strict';
 
 var brout  = require('../lib/brout');
@@ -225,12 +229,15 @@ describe('brout', function () {
       console.trace();
 
       assert(fake.called);
-      var lines = fake.args[0].split('\n');
-      assert(lines.length > 0);
-      lines.slice(0, lines.length - 1).forEach(function (line) {
-        assert.equal(line.indexOf("    at "), 0, line);
+      var l, lines = fake.args[0].split('\n');
+      assert(l = lines.length > 0);
+      lines.slice(0, l = l - 1).forEach(function (line, i) {
+        if (i !== l) {
+          assert.ok(!!line.match(/(?=^\s+at\s+)|(^.*@http:\/\/.+)/), line);
+        } else {
+          assert.equal(line, '');
+        }
       });
-      assert.equal(lines[lines.length - 1], '');
     } finally {
       process.stdout.write = originalWrite;
     }
