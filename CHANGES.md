@@ -1,5 +1,12 @@
 # Changes
 
+## 1.1.1
+
+- Fix referencing error on `console.log` and `console.error`
+  These were previously overwritten by `console.info` and console.warn`
+- Fix the match criteria in the console.trace test to accommodate
+  phantomJS 2.2.1 trace format
+
 ## 1.1.0
 
 Streams 3: Update `through2` to `2.0`
