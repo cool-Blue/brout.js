@@ -5,11 +5,15 @@
  *
  * @license MIT
  */
-/*globals describe, it, beforeEach, afterEach*/
+/*jslint
+ regexp: true
+ debug: true
+ */
+/*globals describe, it, beforeEach, afterEach, debugger*/
 'use strict';
 debugger;
 // require('../lib/brout1');
-var brout = require('../lib/brout');
+var brout = require('brout');
 
 console.log('log');
 console.info('info');
@@ -18,7 +22,6 @@ console.error('error');
 process.stdout.write('stdout\n');
 process.stderr.write('stderr\n');
 
-require('../lib/brout1');
 var brout = require('../lib/brout');
 
 console.log('log');

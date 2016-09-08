@@ -5,6 +5,7 @@
 'use strict';
 
 var sourceFile = "./test/brout-test.js";
+
 var b = require('browserify');
 const mocaccino = require('mocaccino');
 const phantomic = require('phantomic');
