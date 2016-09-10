@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test timeout</title>
+    <style>
+        body {
+            background-color: beige;
+        }
+        #sketch_airplane {
+            background-image: url('https://d17wj6ajhy2qee.cloudfront.net/assets/images/sketch_airplane-87bba80bde2b6a475c4ae782212fd683.png');
+            height: 107px;
+            left: -182px;
+            top: 200px;
+            width: 182px;
+            position: fixed;
+            z-index: 2;
+        }
+    </style>
+    <link href="https://d17wj6ajhy2qee.cloudfront.net/assets/bower/bootstrap/dist/css/bootstrap-d2ab08de4855f3f73d2ecec6da794293.css" rel="stylesheet" type="text/css">
+    <link href="https://d17wj6ajhy2qee.cloudfront.net/assets/stylesheets/app-b109f3bc2a5a2528003f5695607fe63b.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1 id="target">WOOF!!</h1>
+<script src="https://d17wj6ajhy2qee.cloudfront.net/assets/javascripts/jquery-2.1.1.min-6631a779321bc03f4a5281d3ff526254.js"></script>
+
+<!--<script src="request-animation-frame.js"></script>-->
+
+<script type="text/javascript" src="node_modules/tween.js/src/Tween.js"></script>
+<script>
+    ;(function(jq, TWEEN) {
+
+        function plane() {
+
+            var $plane = jq('<div />', {
+                id: "sketch_airplane"
+            }).appendTo('body');
+            var tween = new TWEEN.Tween({x: -182, y: 0})
+                .to({x: jq(window).width() + 182}, 10000)
+                .easing(TWEEN.Easing.Linear.None)
+                .onUpdate(function () {
+                    var transform = 'translateX(' + this.x + 'px)';
+                    $plane.css('webkitTransform', transform);
+                    $plane.css('transform', transform);
+                })
+                .onStart(function() {
+                    target.textContent = 'WOOF WOOF!!';
+                })
+                .onComplete(function() {
+                    target.textContent = '';
+                    $plane.remove();
+                    plane();
+                    setTimeout(animate, 100);
+                })
+                .delay(0)
+                .start();
+        }
+
+        function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+        }
+
+        jq(function () {
+            plane();
+            animate();
+        });
+    })(window.jQuery.noConflict(), window.TWEEN);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test animation in phantomjs</title>
+    <style>
+        body {
+            background-color: beige;
+        }
+        #sketch_airplane {
+            background-image: url('https://d17wj6ajhy2qee.cloudfront.net/assets/images/sketch_airplane-87bba80bde2b6a475c4ae782212fd683.png');
+            height: 107px;
+            left: -182px;
+            top: 200px;
+            width: 182px;
+            position: fixed;
+            z-index: 2;
+        }
+    </style>
+    <link href="https://d17wj6ajhy2qee.cloudfront.net/assets/bower/bootstrap/dist/css/bootstrap-d2ab08de4855f3f73d2ecec6da794293.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script src="https://d17wj6ajhy2qee.cloudfront.net/assets/javascripts/jquery-2.1.1.min-6631a779321bc03f4a5281d3ff526254.js"></script>
+
+<script>
+    void function() {
+        console.log("page");
+        var $plane = $('<div />', {
+                id: "sketch_airplane"
+            }).appendTo('body'),
+            x      = 0,
+            t      = 0,
+            T      = 2000;
+
+        function slide(t) {
+            console.log("t: " + t + '\t' + Date.now() + '\t' + performance.now());
+            var transform = 'translateX(' + (x += 1) + 'px)';
+            $plane.css('webkitTransform', transform);
+            $plane.css('transform', transform);
+//            if(t >= T) console.log('>>>EXIT')
+            try {
+                requestAnimationFrame(slide);
+            } catch(e) {
+                console.log("error: " + e.message);
+                throw(e)
+            }
+        }
+
+        $(function () {
+            slide(0)
+        })
+    }($)
+</script>
+</body>
+</html>
