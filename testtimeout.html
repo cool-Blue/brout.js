@@ -44,9 +44,11 @@
                     $plane.css('transform', transform);
                 })
                 .onStart(function() {
+//                    console.log('start...')
                     target.textContent = 'WOOF WOOF!!';
                 })
                 .onComplete(function() {
+//                    console.log('complete...')
                     target.textContent = '';
                     $plane.remove();
                     plane();
@@ -62,7 +64,9 @@
         }
 
         jq(function () {
+            console.log(requestAnimationFrame)
             plane();
+            console.log('animate...')
             animate();
         });
     })(window.jQuery.noConflict(), window.TWEEN);

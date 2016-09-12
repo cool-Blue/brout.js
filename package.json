@@ -33,6 +33,7 @@
     "url": "https://github.com/mantoni/brout.js.git"
   },
   "dependencies": {
+    "phantom": "^2.1.21",
     "through2": "^2.0.0"
   },
   "devDependencies": {

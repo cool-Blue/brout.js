@@ -41,17 +41,33 @@ var now = (function () {
 
 // MIT license
 
+// Adapted to shim floating point milliseconds since the page was opened
+// https://developers.google.com/web/updates/2012/05/requestAnimationFrame-API-now-with-sub-millisecond-precision?hl=en
+
 (function() {
   var lastTime = 0;
-  window.requestAnimationFrame = function(callback, element) {
+  var rAF = window.requestAnimationFrame;
+
+  window.requestAnimationFrame = function(callback) {
     var currTime = now();
-    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-    var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-      timeToCall);
+    var timeToCall = Math.max(0, 1000/60 - (currTime - lastTime));
+    var tcb = currTime + timeToCall;
+    var cbprxy = (function (cb, t) {
+      return function (discard) {
+        cb(t)
+      }
+    })(callback, tcb);
+    var id = rAF
+      ? rAF.call(window, cbprxy)
+      : window.setTimeout(function() { callback(tcb); }, timeToCall);
+
     lastTime = currTime + timeToCall;
+
     return id;
   };
-  window.cancelAnimationFrame = function(id) {
-    clearTimeout(id);
-  };
+
+  if(!window.cancelAnimationFrame)
+    window.cancelAnimationFrame = clearTimeout
+
 }());
+console.log("rAF injected");

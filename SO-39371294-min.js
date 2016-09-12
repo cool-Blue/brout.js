@@ -1,7 +1,6 @@
 /**
  * Adjusted by cool.blue on 08-Sep-16.
  */
-var system = require('system');
 var page;
 
 // user supplied url
